@@ -7,7 +7,7 @@ import androidx.navigation.navOptions
 import com.example.ui.coffeeit.R
 
 
-class BaseFragment : Fragment() {
+open class BaseFragment : Fragment() {
 
     var dialog: LoadingDialog? = null
 
@@ -23,6 +23,13 @@ class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dialog = LoadingDialog(requireContext())
+    }
 
+    fun showLoading() {
+        dialog?.show()
+    }
+
+    fun hideLoading() {
+        dialog?.dismiss()
     }
 }

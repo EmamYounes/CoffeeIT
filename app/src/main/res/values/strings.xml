@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CoffeeIT</string>
+    <string name="empty_list">The coffee machine does not exist</string>
 </resources>

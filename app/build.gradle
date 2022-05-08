@@ -22,6 +22,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -32,7 +35,7 @@ android {
 }
 
 dependencies {
-    def lottieVersion = "3.4.0"
+    def lottieVersion = "3.4.1"
     def nav_version = "2.4.2"
     def retrofit_version = "2.9.0"
     def okhttp_version = "4.2.0"
@@ -49,7 +52,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
     implementation("com.squareup.okhttp3:logging-interceptor:$okhttp_version")
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     //Kodein Dependency Injection
@@ -59,8 +62,12 @@ dependencies {
     //Android RX
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation 'com.jakewharton.rxbinding:rxbinding:0.4.0'
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.4'
     implementation 'com.jakewharton.rxrelay3:rxrelay:3.0.1'
 
+    implementation "com.github.lisawray.groupie:groupie:2.8.0"
+    implementation "com.github.lisawray.groupie:groupie-databinding:2.8.0"
+    implementation "com.github.lisawray.groupie:groupie-viewbinding:2.8.0"
+    implementation "com.github.lisawray.groupie:groupie-kotlin-android-extensions:2.8.0"
 
 }
