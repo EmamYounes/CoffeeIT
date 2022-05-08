@@ -51,11 +51,16 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:$okhttp_version")
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation "io.reactivex.rxjava3:rxjava:3.1.4"
 
     //Kodein Dependency Injection
     implementation "org.kodein.di:kodein-di-generic-jvm:6.2.1"
     implementation "org.kodein.di:kodein-di-framework-android-x:6.2.1"
+
+    //Android RX
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+    implementation 'com.jakewharton.rxrelay3:rxrelay:3.0.1'
 
 
 }
