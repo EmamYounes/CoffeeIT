@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.navOptions
 import com.example.ui.coffeeit.R
+import com.google.android.material.snackbar.Snackbar
 
 
 open class BaseFragment : Fragment() {
@@ -31,5 +32,13 @@ open class BaseFragment : Fragment() {
 
     fun hideLoading() {
         dialog?.dismiss()
+    }
+
+    fun showMessage(message: String) {
+        Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).also { snackbar ->
+            snackbar.setAction("Ok") {
+                snackbar.dismiss()
+            }
+        }.show()
     }
 }

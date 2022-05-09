@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
     <color name="green">#AED7A0</color>
+    <color name="olivine">#9BC88B</color>
+    <color name="gray">#C4D1C4</color>
 </resources>

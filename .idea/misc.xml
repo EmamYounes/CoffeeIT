@@ -3,11 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/drawable/dark_green_border.xml" value="0.1915" />
+        <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/drawable/green_border.xml" value="0.1915" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/drawable/greyroundedvw.xml" value="0.1915" />
+        <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/drawable/ic_ellipse1.xml" value="0.1915" />
+        <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/drawable/olivine_border.xml" value="0.1915" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/base_activity.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/coffee_brew_activity.xml" value="0.22" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/extra_fragment.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/extra_item.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/extra_sub_item.xml" value="0.18" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/loading_lottie_dialog.xml" value="1.131578947368421" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/overview_fragment.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/size_fragment.xml" value="0.27291666666666664" />

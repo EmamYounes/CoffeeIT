@@ -2,41 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp">
 
     <RelativeLayout
         android:id="@+id/type_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/green_border"
+        android:background="@drawable/olivine_border"
         android:padding="24dp">
 
         <TextView
-            android:id="@+id/type_name"
+            android:id="@+id/extra_sub_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextStyle3"
             tools:text="Lungo" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/type_name"
-            android:layout_marginTop="24dp"
-            android:background="@color/white" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <FrameLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/type_name"
-            android:layout_marginTop="36dp"
-            android:orientation="vertical">
+            android:layout_alignParentEnd="true">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview"
+            <ImageView
+                android:id="@+id/check_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/extra_sub_item" />
-        </LinearLayout>
+                android:layout_gravity="center"
+                android:src="@drawable/ic_vector1"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_ellipse1" />
+        </FrameLayout>
     </RelativeLayout>
 </LinearLayout>
