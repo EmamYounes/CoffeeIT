@@ -19,7 +19,7 @@ class CoffeeItApplication : Application(), KodeinAware {
         import(androidXModule(this@CoffeeItApplication))
 
         bind() from singleton { NetworkConnectionInterceptor(instance()) }
-        bind() from singleton { RetrofitService(instance()) }
+        bind() from singleton { RetrofitService(instance(), instance()) }
         bind() from singleton { CoffeeBrewRemoteData(instance()) }
         bind() from singleton { CoffeeBrewRepository(instance(), instance()) }
         bind() from singleton { CoffeeBrewViewModelFactory(instance()) }

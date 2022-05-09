@@ -2,4 +2,7 @@
     <string name="app_name">CoffeeIT</string>
     <string name="empty_list">The coffee machine does not exist</string>
     <string name="brew_your_coffee">Brew your coffee</string>
+    <string name="err_no_internet_connection_str">Application requires an active data connection, please enable internet connection</string>
+    <string name="open_settings">Open Settings</string>
+
 </resources>

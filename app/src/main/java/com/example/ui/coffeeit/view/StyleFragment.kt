@@ -66,6 +66,7 @@ class StyleFragment : BaseFragment(), KodeinAware, OnClick {
         callCoffeeItApi()
         initRecyclerView()
         manageCoffeeItApiResponse()
+        manageCoffeeItApiErrorResponse()
     }
 
     private fun callCoffeeItApi() {
@@ -81,6 +82,13 @@ class StyleFragment : BaseFragment(), KodeinAware, OnClick {
             } else {
                 handleListState(it)
             }
+        }
+    }
+
+    private fun manageCoffeeItApiErrorResponse() {
+        viewModel.errorGetCoffeeItApi.subscribe {
+            hideLoading()
+            showMessage(it)
         }
     }
 

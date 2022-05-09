@@ -21,23 +21,28 @@ interface RetrofitService {
     companion object {
 
         operator fun invoke(
-            networkConnectionInterceptor: NetworkConnectionInterceptor
+            networkConnectionInterceptor: NetworkConnectionInterceptor,
+            responseInterceptor: ResponseInterceptor
         ): RetrofitService {
 
             return Retrofit.Builder()
-                .client(getHttpClient(networkConnectionInterceptor))
+                .client(getHttpClient(networkConnectionInterceptor, responseInterceptor))
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(getHttpClient(networkConnectionInterceptor))
+                .client(getHttpClient(networkConnectionInterceptor, responseInterceptor))
                 .build()
                 .create(RetrofitService::class.java)
         }
 
-        private fun getHttpClient(networkConnectionInterceptor: NetworkConnectionInterceptor): OkHttpClient {
+        private fun getHttpClient(
+            networkConnectionInterceptor: NetworkConnectionInterceptor,
+            responseInterceptor: ResponseInterceptor
+        ): OkHttpClient {
             val builder = OkHttpClient.Builder()
             builder.addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
                 .addInterceptor(networkConnectionInterceptor)
+                .addInterceptor(responseInterceptor)
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .writeTimeout(120, TimeUnit.SECONDS)
                 .readTimeout(120, TimeUnit.SECONDS)

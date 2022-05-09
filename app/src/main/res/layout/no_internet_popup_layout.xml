@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/buttom_background"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/noInternetPopup_top_line"
+        android:layout_width="57dp"
+        android:layout_height="3dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/white_background_radius_2dp" />
+
+    <ImageView
+        android:id="@+id/noInternetPopup_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/noInternetPopup_top_line"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_warning_svgrepo_com" />
+
+    <TextView
+        android:id="@+id/noInternetPopup_title"
+        style="@style/TextStyle1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/noInternetPopup_image"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:text="@string/err_no_internet_connection_str" />
+
+
+    <Button
+        android:id="@+id/try_again"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/noInternetPopup_title"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/border_button_green_background"
+        android:gravity="center_horizontal"
+        android:text="@string/open_settings"
+        android:textAllCaps="false" />
+
+
+</RelativeLayout>

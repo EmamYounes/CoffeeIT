@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/drawable-v24/border_button_green_background.xml" value="0.1915" />
+        <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/drawable-v24/buttom_background.xml" value="0.1915" />
+        <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/drawable-v24/ic_warning_svgrepo_com.xml" value="0.1915" />
+        <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/drawable-v24/white_background_radius_2dp.xml" value="0.1915" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/drawable/dark_green_border.xml" value="0.1915" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/drawable/green_border.xml" value="0.1915" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/drawable/greyroundedvw.xml" value="0.1915" />
@@ -14,6 +18,7 @@
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/extra_item.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/extra_sub_item.xml" value="0.18" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/loading_lottie_dialog.xml" value="0.8100961538461539" />
+        <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/no_internet_popup_layout.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/overview_fragment.xml" value="0.5" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/overview_item.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/size_fragment.xml" value="0.27291666666666664" />

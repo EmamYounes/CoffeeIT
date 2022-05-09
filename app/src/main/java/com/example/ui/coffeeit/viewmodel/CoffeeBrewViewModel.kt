@@ -16,13 +16,13 @@ class CoffeeBrewViewModel(
 
     fun getCoffeeItApi() {
         repository.getCoffeeItApi()
-            .doOnError { errorGetCoffeeItApi.accept(it.localizedMessage!!.toString()) }
+            .doOnError { errorGetCoffeeItApi.accept(it.message!!.toString()) }
             .subscribe({
                 it.let { response ->
                     successGetCoffeeItApi.accept(response)
                 }
             }, { throwable ->
-                errorGetCoffeeItApi.accept(throwable.localizedMessage!!.toString())
+                errorGetCoffeeItApi.accept(throwable.message!!.toString())
             })
 
     }
