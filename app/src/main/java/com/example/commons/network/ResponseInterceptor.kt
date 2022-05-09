@@ -1,6 +1,7 @@
 package com.example.commons.network
 
 import android.util.Log
+import com.example.commons.utilities.ApiException
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
@@ -23,10 +24,10 @@ class ResponseInterceptor() : Interceptor {
 
             when (response.code) {
                 400 -> {
-                    throw Exception("Invalid properties")
+                    throw ApiException("Invalid properties")
                 }
                 404 -> {
-                    throw Exception("The coffee machine does not exist")
+                    throw ApiException("The coffee machine does not exist")
                 }
             }
 
