@@ -127,4 +127,12 @@ class StyleFragment : BaseFragment(), KodeinAware, OnClick {
             activity?.findNavController(R.id.coffee_brew_nav_host_fragment)
         navController?.navigate(R.id.sizeFragment, bundleOf(), options)
     }
+
+    override fun getSubTitle(): String {
+        return getString(R.string.select_your_style)
+    }
+
+    override fun showBackBtn(): Boolean {
+        return false
+    }
 }

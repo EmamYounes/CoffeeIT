@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.navOptions
 import com.example.ui.coffeeit.R
+import com.example.ui.coffeeit.view.CoffeeBrewActivity
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -24,6 +25,13 @@ open class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dialog = LoadingDialog(requireContext())
+        (activity as CoffeeBrewActivity).setTitle(getTitle())
+        (activity as CoffeeBrewActivity).setSubTitle(getSubTitle())
+        if (showBackBtn()) {
+            (activity as CoffeeBrewActivity).showBackBtn()
+        } else {
+            (activity as CoffeeBrewActivity).hideBackBtn()
+        }
     }
 
     fun showLoading() {
@@ -40,5 +48,17 @@ open class BaseFragment : Fragment() {
                 snackbar.dismiss()
             }
         }.show()
+    }
+
+    open fun getTitle(): String {
+        return getString(R.string.title)
+    }
+
+    open fun getSubTitle(): String {
+        return getString(R.string.title)
+    }
+
+    open fun showBackBtn(): Boolean {
+        return true
     }
 }

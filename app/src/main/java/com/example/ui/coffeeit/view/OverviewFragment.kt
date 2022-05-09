@@ -82,6 +82,9 @@ class OverviewFragment : BaseFragment(), KodeinAware {
             setHasFixedSize(true)
             adapter = overviewAdapter
         }
+    }
 
+    override fun getSubTitle(): String {
+        return getString(R.string.overview)
     }
 }

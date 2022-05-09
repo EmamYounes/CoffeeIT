@@ -112,4 +112,8 @@ class SizeFragment : BaseFragment(), KodeinAware, OnClick {
             activity?.findNavController(R.id.coffee_brew_nav_host_fragment)
         navController?.navigate(R.id.extraFragment, bundleOf(), options)
     }
+
+    override fun getSubTitle(): String {
+        return getString(R.string.select_your_size)
+    }
 }
