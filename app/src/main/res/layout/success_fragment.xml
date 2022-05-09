@@ -17,4 +17,12 @@
         app:lottie_fileName="coffee_orange.json"
         app:lottie_loop="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lottieAnimationView"
+        android:text="@string/your_coffee_is_being_prepared"
+        android:textAppearance="@style/TextStyle2"
+        android:textColor="@color/orange" />
+
 </RelativeLayout>
