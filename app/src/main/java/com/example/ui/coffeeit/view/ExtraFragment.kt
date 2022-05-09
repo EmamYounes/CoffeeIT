@@ -4,16 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ExpandableListView
 import android.widget.LinearLayout
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.commons.pojo.ExtrasItem
 import com.example.commons.ui.BaseFragment
 import com.example.ui.coffeeit.R
-import com.example.ui.coffeeit.adapter.ExtraAdapter
+import com.example.ui.coffeeit.adapter.ExtraExpandableListAdapter
+import com.example.ui.coffeeit.data_classes.ExtraDataItem
 import com.example.ui.coffeeit.data_classes.OverviewDataItem
 import com.example.ui.coffeeit.data_classes.Type
 import com.example.ui.coffeeit.viewmodel.CoffeeBrewViewModel
@@ -29,10 +29,12 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
     private val factory: CoffeeBrewViewModelFactory by instance()
 
     private lateinit var viewModel: CoffeeBrewViewModel
-    private var recyclerview: RecyclerView? = null
+    private var recyclerview: ExpandableListView? = null
     private var emptyCase: LinearLayout? = null
 
-    private var extraAdapter = ExtraAdapter(mutableListOf())
+    private var extraAdapter = ExtraExpandableListAdapter(
+        requireContext(), mutableListOf(), hashMapOf()
+    )
 
 
     override fun onCreateView(
@@ -65,7 +67,6 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
 
 
     private fun bindUI() {
-        initRecyclerView()
         manageSizeList()
     }
 
@@ -78,8 +79,28 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
         }
     }
 
-    private fun handleListState(sizeList: List<ExtrasItem?>) {
-        extraAdapter.addList(sizeList)
+    private fun handleListState(extraList: List<ExtrasItem?>) {
+        val extraNameList: List<String?> =
+            extraList.map {
+                it?.name
+            }.toList()
+
+        val expandableListDetail =
+            extraList.map { extrasItem ->
+                val data = HashMap<String, List<ExtraDataItem>>()
+                val list = extrasItem?.subselections?.map {
+                    ExtraDataItem(it?.name.toString(), false)
+                }
+                data[extrasItem?.name.toString()] = list as List<ExtraDataItem>
+                data
+            }.first()
+        extraAdapter =
+            ExtraExpandableListAdapter(
+                requireContext(),
+                extraNameList as ArrayList<String>,
+                expandableListDetail
+            )
+        recyclerview!!.setAdapter(extraAdapter)
         recyclerview?.visibility = View.VISIBLE
         emptyCase?.visibility = View.GONE
     }
@@ -89,25 +110,15 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
         emptyCase?.visibility = View.VISIBLE
     }
 
-    private fun initRecyclerView() {
-        recyclerview?.apply {
-            layoutManager = LinearLayoutManager(context)
-            setHasFixedSize(true)
-            adapter = extraAdapter
-        }
-
-    }
-
-
-    override fun onItemClickedExtra(item: ExtrasItem) {
+    override fun onItemClickedSubExtra(item: ExtraDataItem) {
         val overviewList = viewModel.overviewList.value
-        val overviewDataItem = OverviewDataItem(item.name.toString(), Type.EXTRA)
+        val overviewDataItem = OverviewDataItem(item.name, Type.SUB_EXTRA)
         overviewList?.toMutableList()?.add(overviewDataItem)
         overviewList?.let { viewModel.overviewList.accept(it) }
-        navToExtraFragment()
+        navToOverviewFragment()
     }
 
-    private fun navToExtraFragment() {
+    private fun navToOverviewFragment() {
         val navController =
             activity?.findNavController(R.id.coffee_brew_nav_host_fragment)
         navController?.navigate(R.id.overviewFragment, bundleOf(), options)
