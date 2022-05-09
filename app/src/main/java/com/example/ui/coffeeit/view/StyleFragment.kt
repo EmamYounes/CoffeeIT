@@ -15,6 +15,8 @@ import com.example.commons.pojo.TypesItem
 import com.example.commons.ui.BaseFragment
 import com.example.ui.coffeeit.R
 import com.example.ui.coffeeit.adapter.StyleAdapter
+import com.example.ui.coffeeit.data_classes.OverviewDataItem
+import com.example.ui.coffeeit.data_classes.Type
 import com.example.ui.coffeeit.viewmodel.CoffeeBrewViewModel
 import com.example.ui.coffeeit.viewmodel.CoffeeBrewViewModelFactory
 import org.kodein.di.KodeinAware
@@ -45,6 +47,11 @@ class StyleFragment : BaseFragment(), KodeinAware, OnClick {
         super.onViewCreated(view, savedInstanceState)
         init()
         bindUI()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.overviewList.accept(mutableListOf())
     }
 
     private fun init() {
@@ -99,7 +106,11 @@ class StyleFragment : BaseFragment(), KodeinAware, OnClick {
 
 
     override fun onItemClickedStyle(item: TypesItem) {
-        viewModel.setSelectedTypeItem.accept(item)
+
+        val overviewList = viewModel.overviewList.value
+        val overviewDataItem = OverviewDataItem(item.name.toString(), Type.STYLE)
+        overviewList?.toMutableList()?.add(overviewDataItem)
+        overviewList?.let { viewModel.overviewList.accept(it) }
         navToSizeFragment()
     }
 

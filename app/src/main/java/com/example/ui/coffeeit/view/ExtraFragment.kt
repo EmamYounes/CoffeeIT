@@ -14,6 +14,8 @@ import com.example.commons.pojo.ExtrasItem
 import com.example.commons.ui.BaseFragment
 import com.example.ui.coffeeit.R
 import com.example.ui.coffeeit.adapter.ExtraAdapter
+import com.example.ui.coffeeit.data_classes.OverviewDataItem
+import com.example.ui.coffeeit.data_classes.Type
 import com.example.ui.coffeeit.viewmodel.CoffeeBrewViewModel
 import com.example.ui.coffeeit.viewmodel.CoffeeBrewViewModelFactory
 import org.kodein.di.KodeinAware
@@ -44,6 +46,14 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
         super.onViewCreated(view, savedInstanceState)
         init()
         bindUI()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val list = viewModel.overviewList.value?.filter {
+            (it.type.name != Type.EXTRA.name || it.type.name != Type.SUB_EXTRA.name)
+        }
+        list?.let { viewModel.overviewList.accept(it) }
     }
 
     private fun init() {
@@ -90,7 +100,10 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
 
 
     override fun onItemClickedExtra(item: ExtrasItem) {
-        viewModel.setSelectedExtrasItem.accept(item)
+        val overviewList = viewModel.overviewList.value
+        val overviewDataItem = OverviewDataItem(item.name.toString(), Type.EXTRA)
+        overviewList?.toMutableList()?.add(overviewDataItem)
+        overviewList?.let { viewModel.overviewList.accept(it) }
         navToExtraFragment()
     }
 
