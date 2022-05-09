@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_marginBottom="12dp"
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:id="@+id/type_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/green"
+        android:background="@drawable/green_border"
         android:padding="24dp">
 
         <TextView

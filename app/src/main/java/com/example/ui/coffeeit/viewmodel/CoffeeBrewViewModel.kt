@@ -5,6 +5,7 @@ import com.example.commons.pojo.CoffeeItResponse
 import com.example.commons.pojo.ExtrasItem
 import com.example.commons.pojo.SizesItem
 import com.example.commons.pojo.TypesItem
+import com.example.ui.coffeeit.data_classes.OverviewDataItem
 import com.example.ui.coffeeit.model.CoffeeBrewRepository
 import com.jakewharton.rxrelay3.BehaviorRelay
 
@@ -17,6 +18,7 @@ class CoffeeBrewViewModel(
     var setSelectedTypeItem = BehaviorRelay.create<TypesItem>()
     var setSelectedSizeItem = BehaviorRelay.create<SizesItem>()
     var setSelectedExtrasItem = BehaviorRelay.create<ExtrasItem>()
+    var overviewList = BehaviorRelay.create<List<OverviewDataItem>>()
 
     fun getCoffeeItApi() {
         repository.getCoffeeItApi()
