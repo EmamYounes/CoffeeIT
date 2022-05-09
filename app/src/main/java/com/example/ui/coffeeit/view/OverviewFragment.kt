@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.commons.ui.BaseFragment
@@ -26,6 +29,7 @@ class OverviewFragment : BaseFragment(), KodeinAware {
     private lateinit var viewModel: CoffeeBrewViewModel
 
     private var recyclerview: RecyclerView? = null
+    private var submit: TextView? = null
     private var overviewAdapter = OverviewAdapter(mutableListOf())
 
     override fun onCreateView(
@@ -45,11 +49,22 @@ class OverviewFragment : BaseFragment(), KodeinAware {
     private fun init() {
         viewModel = ViewModelProviders.of(this, factory).get(CoffeeBrewViewModel::class.java)
         recyclerview = view?.findViewById(R.id.recyclerview)
+        submit = view?.findViewById(R.id.submit)
     }
 
     private fun bindUI() {
         initRecyclerView()
         manageOverviewList()
+        handleSubmitAction()
+    }
+
+    private fun handleSubmitAction() {
+        submit?.setOnClickListener {
+            val navController =
+                activity?.findNavController(R.id.coffee_brew_nav_host_fragment)
+            navController?.backQueue?.clear()
+            navController?.navigate(R.id.successFragment, bundleOf(), options)
+        }
     }
 
     private fun manageOverviewList() {
