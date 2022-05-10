@@ -18,7 +18,7 @@
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/extra_fragment.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/extra_item.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/extra_sub_item.xml" value="0.18" />
-        <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/loading_lottie_dialog.xml" value="0.8100961538461539" />
+        <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/loading_lottie_dialog.xml" value="0.25" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/no_internet_popup_layout.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/overview_fragment.xml" value="0.18" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/overview_item.xml" value="0.27291666666666664" />
@@ -27,6 +27,7 @@
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/style_fragment.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/style_item.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/success_fragment.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/emamyounes/AndroidStudioProjects/CoffeeIT/app/src/main/res/layout/welcome_fragment.xml" value="0.27291666666666664" />
       </map>
     </option>
   </component>

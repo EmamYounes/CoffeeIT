@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coffee_brew_navigation">
+    android:id="@+id/coffee_brew_navigation"
+    app:startDestination="@id/welcomeFragment">
 
     <fragment
         android:id="@+id/styleFragment"
@@ -32,4 +34,10 @@
         android:name="com.example.ui.coffeeit.view.SuccessFragment"
         android:label="SuccessFragment"
         tools:layout="@layout/success_fragment" />
+
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.example.ui.coffeeit.view.WelcomeFragment"
+        android:label="SuccessFragment"
+        tools:layout="@layout/welcome_fragment" />
 </navigation>
