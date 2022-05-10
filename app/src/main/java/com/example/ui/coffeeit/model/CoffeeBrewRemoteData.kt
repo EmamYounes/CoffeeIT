@@ -8,6 +8,6 @@ import io.reactivex.rxjava3.core.Single
 class CoffeeBrewRemoteData(private val service: RetrofitService) :
     CoffeeBrewDataContract.Remote {
     override fun getCoffeeItApi(): Single<CoffeeItResponse> {
-        return service.getCoffeeItApi(Constant.BASE_URL + "coffee-machine/" + Constant.COFFEE_MACHINE_ID)
+        return service.getCoffeeItApi("coffee-machine/" + Constant.COFFEE_MACHINE_ID)
     }
 }

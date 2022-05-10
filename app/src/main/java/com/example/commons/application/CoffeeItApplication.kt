@@ -2,6 +2,7 @@ package com.example.commons.application
 
 import android.app.Application
 import com.example.commons.network.NetworkConnectionInterceptor
+import com.example.commons.network.ResponseInterceptor
 import com.example.commons.network.RetrofitService
 import com.example.ui.coffeeit.model.CoffeeBrewRemoteData
 import com.example.ui.coffeeit.model.CoffeeBrewRepository
@@ -19,9 +20,10 @@ class CoffeeItApplication : Application(), KodeinAware {
         import(androidXModule(this@CoffeeItApplication))
 
         bind() from singleton { NetworkConnectionInterceptor(instance()) }
+        bind() from singleton { ResponseInterceptor() }
         bind() from singleton { RetrofitService(instance(), instance()) }
         bind() from singleton { CoffeeBrewRemoteData(instance()) }
-        bind() from singleton { CoffeeBrewRepository(instance(), instance()) }
+        bind() from singleton { CoffeeBrewRepository(instance()) }
         bind() from singleton { CoffeeBrewViewModelFactory(instance()) }
     }
 }

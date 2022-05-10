@@ -25,12 +25,29 @@ open class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dialog = LoadingDialog(requireContext())
+    }
+
+    override fun onResume() {
+        super.onResume()
         (activity as CoffeeBrewActivity).setTitle(getTitle())
         (activity as CoffeeBrewActivity).setSubTitle(getSubTitle())
+        handleVisibilityBackBtn()
+        handleVisibilityToolBar()
+    }
+
+    private fun handleVisibilityBackBtn() {
         if (showBackBtn()) {
             (activity as CoffeeBrewActivity).showBackBtn()
         } else {
             (activity as CoffeeBrewActivity).hideBackBtn()
+        }
+    }
+
+    private fun handleVisibilityToolBar() {
+        if (showToolBar()) {
+            (activity as CoffeeBrewActivity).showToolBar()
+        } else {
+            (activity as CoffeeBrewActivity).hideToolBar()
         }
     }
 
@@ -59,6 +76,10 @@ open class BaseFragment : Fragment() {
     }
 
     open fun showBackBtn(): Boolean {
+        return true
+    }
+
+    open fun showToolBar(): Boolean {
         return true
     }
 }

@@ -3,9 +3,9 @@ package com.example.commons.ui
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.ui.coffeeit.R
 
 open class BaseActivity : AppCompatActivity() {
@@ -13,14 +13,15 @@ open class BaseActivity : AppCompatActivity() {
     private var backBtn: ImageView? = null
     private var title: TextView? = null
     private var subTitle: TextView? = null
+    private var toolBar: LinearLayout? = null
 
     override fun setContentView(layoutResID: Int) {
-        val constraintLayout: ConstraintLayout =
-            layoutInflater.inflate(R.layout.base_activity, null) as ConstraintLayout
-        val activityContainer: FrameLayout = constraintLayout.findViewById(R.id.layout_container)
+        val linearLayout: LinearLayout =
+            layoutInflater.inflate(R.layout.base_activity, null) as LinearLayout
+        val activityContainer: FrameLayout = linearLayout.findViewById(R.id.layout_container)
         layoutInflater.inflate(layoutResID, activityContainer, true)
 
-        super.setContentView(constraintLayout)
+        super.setContentView(linearLayout)
     }
 
     override fun onResume() {
@@ -37,6 +38,7 @@ open class BaseActivity : AppCompatActivity() {
         backBtn = findViewById(R.id.back_btn)
         title = findViewById(R.id.title)
         subTitle = findViewById(R.id.sub_title)
+        toolBar = findViewById(R.id.tool_bar)
     }
 
     private fun handleBackBtnAction() {
@@ -59,5 +61,13 @@ open class BaseActivity : AppCompatActivity() {
 
     fun showBackBtn() {
         backBtn?.visibility = View.VISIBLE
+    }
+
+    fun hideToolBar() {
+        toolBar?.visibility = View.GONE
+    }
+
+    fun showToolBar() {
+        toolBar?.visibility = View.VISIBLE
     }
 }

@@ -14,7 +14,7 @@
         android:padding="10dp"
         android:scaleType="fitCenter"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="loading_coffee.json"
-        app:lottie_loop="true" />
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading_coffee" />
 
 </RelativeLayout>

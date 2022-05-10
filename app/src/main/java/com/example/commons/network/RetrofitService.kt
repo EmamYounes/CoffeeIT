@@ -1,10 +1,12 @@
 package com.example.commons.network
 
 import com.example.commons.pojo.CoffeeItResponse
+import com.example.commons.utilities.Constant
 import io.reactivex.rxjava3.core.Single
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Url
@@ -25,7 +27,8 @@ interface RetrofitService {
             responseInterceptor: ResponseInterceptor
         ): RetrofitService {
 
-            return Retrofit.Builder()
+            return Retrofit.Builder().baseUrl(Constant.BASE_URL)
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .client(getHttpClient(networkConnectionInterceptor, responseInterceptor))
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(getHttpClient(networkConnectionInterceptor, responseInterceptor))

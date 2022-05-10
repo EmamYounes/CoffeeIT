@@ -14,8 +14,8 @@
         android:padding="10dp"
         android:scaleType="fitCenter"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="coffee_orange.json"
-        app:lottie_loop="true" />
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/coffee_orange" />
 
     <TextView
         android:layout_width="wrap_content"

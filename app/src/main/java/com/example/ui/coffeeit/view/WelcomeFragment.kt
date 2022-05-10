@@ -22,7 +22,7 @@ class WelcomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        delay(3000) {
+        delay(6000) {
             navToExtraFragment()
         }
     }
@@ -30,7 +30,10 @@ class WelcomeFragment : BaseFragment() {
     private fun navToExtraFragment() {
         val navController =
             activity?.findNavController(R.id.coffee_brew_nav_host_fragment)
-        navController?.backQueue?.clear()
         navController?.navigate(R.id.styleFragment, bundleOf(), options)
+    }
+
+    override fun showToolBar(): Boolean {
+        return false
     }
 }
