@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingTop="20dp"
     tools:context=".view.CoffeeBrewActivity">
 
     <LinearLayout
@@ -15,8 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginStart="16dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:padding="5dp"
                 android:src="@drawable/ic_back_btn" />
 
             <TextView
