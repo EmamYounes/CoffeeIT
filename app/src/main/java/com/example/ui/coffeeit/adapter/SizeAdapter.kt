@@ -37,7 +37,7 @@ class SizeAdapter(myDataset: MutableList<SizesItem>) :
     }
 
 
-    inner class StyleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class StyleViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         var typeView: RelativeLayout = view.findViewById(R.id.type_view)
         var typeName: TextView = view.findViewById(R.id.type_name)
 
@@ -45,9 +45,13 @@ class SizeAdapter(myDataset: MutableList<SizesItem>) :
             typeName.text = model.name
             typeView.tag = position
             typeName.tag = position
-            typeName.setOnClickListener {
-                callbacks!!.onItemClickedSize(model)
-            }
+            typeView.setOnClickListener(this)
+
+        }
+
+        override fun onClick(p0: View?) {
+            val model = mDataset?.get(p0?.tag as Int)
+            model?.let { callbacks!!.onItemClickedSize(it) }
         }
     }
 
