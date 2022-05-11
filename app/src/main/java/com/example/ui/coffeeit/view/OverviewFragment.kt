@@ -26,7 +26,7 @@ class OverviewFragment : BaseFragment(), KodeinAware {
 
     private val factory: CoffeeBrewViewModelFactory by instance()
 
-    private lateinit var viewModel: CoffeeBrewViewModel
+    private val viewModel: CoffeeBrewViewModel by instance()
 
     private var recyclerview: RecyclerView? = null
     private var submit: TextView? = null
@@ -47,7 +47,6 @@ class OverviewFragment : BaseFragment(), KodeinAware {
     }
 
     private fun init() {
-        viewModel = ViewModelProviders.of(this, factory).get(CoffeeBrewViewModel::class.java)
         recyclerview = view?.findViewById(R.id.recyclerview)
         submit = view?.findViewById(R.id.submit)
     }

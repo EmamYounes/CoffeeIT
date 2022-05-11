@@ -28,8 +28,8 @@ class StyleFragment : BaseFragment(), KodeinAware, OnClick {
     override val kodein by kodein()
 
     private val factory: CoffeeBrewViewModelFactory by instance()
+    private val viewModel: CoffeeBrewViewModel by instance()
 
-    private lateinit var viewModel: CoffeeBrewViewModel
     private var recyclerview: RecyclerView? = null
     private var emptyCase: LinearLayout? = null
 
@@ -55,7 +55,6 @@ class StyleFragment : BaseFragment(), KodeinAware, OnClick {
     }
 
     private fun init() {
-        viewModel = ViewModelProviders.of(this, factory).get(CoffeeBrewViewModel::class.java)
         recyclerview = view?.findViewById(R.id.recyclerview)
         emptyCase = view?.findViewById(R.id.empty_case)
     }

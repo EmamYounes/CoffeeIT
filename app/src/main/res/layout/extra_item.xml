@@ -2,27 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:layout_marginTop="16dp">
 
     <RelativeLayout
         android:id="@+id/type_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/green_border"
-        android:padding="24dp">
+        android:paddingStart="24dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="24dp">
 
         <TextView
             android:id="@+id/type_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
             android:textAppearance="@style/TextStyle3"
             tools:text="Lungo" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/type_name"
-            android:layout_marginTop="24dp"
-            android:background="@color/white" />
     </RelativeLayout>
 </LinearLayout>

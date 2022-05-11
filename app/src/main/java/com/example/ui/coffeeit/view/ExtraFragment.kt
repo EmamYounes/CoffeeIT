@@ -8,7 +8,6 @@ import android.widget.ExpandableListView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.os.bundleOf
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.commons.pojo.ExtrasItem
 import com.example.commons.ui.BaseFragment
@@ -29,15 +28,14 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
 
     private val factory: CoffeeBrewViewModelFactory by instance()
 
-    private lateinit var viewModel: CoffeeBrewViewModel
+    private val viewModel: CoffeeBrewViewModel by instance()
     private var recyclerview: ExpandableListView? = null
     private var emptyCase: LinearLayout? = null
     private var next: TextView? = null
 
-    private var extraAdapter = ExtraExpandableListAdapter(
-        requireContext(), mutableListOf(), hashMapOf()
-    )
+    private lateinit var extraAdapter: ExtraExpandableListAdapter
 
+    private var lastExpandPosation = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,11 +59,15 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
     }
 
     private fun init() {
+        extraAdapter = ExtraExpandableListAdapter(
+            requireContext(), mutableListOf(), hashMapOf()
+        )
+
         extraAdapter.callbacks = this
-        viewModel = ViewModelProviders.of(this, factory).get(CoffeeBrewViewModel::class.java)
         recyclerview = view?.findViewById(R.id.recyclerview)
         emptyCase = view?.findViewById(R.id.empty_case)
         next = view?.findViewById(R.id.next)
+
 
     }
 
@@ -85,7 +87,7 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
         val fullExtrasList = viewModel.successGetCoffeeItApi.value?.extras
         val selectedExtrasList = fullExtrasList?.filter {
             viewModel.selectedStyle.value?.extras?.contains(it?.id) == true
-        }
+        }?.toMutableList()
         if (selectedExtrasList?.isEmpty() == true) {
             handleEmptyState()
         } else {
@@ -99,10 +101,10 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
         emptyCase?.visibility = View.GONE
 
 
-        val extraNameList: List<String?> =
+        val extraNameList: List<String> =
             extraList.map {
                 it?.name
-            }.toList()
+            }.toList() as List<String>
 
         val expandableListDetail =
             extraList.map { extrasItem ->
@@ -116,18 +118,24 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
 
         setExtraAdapter(extraNameList, expandableListDetail)
 
+        recyclerview?.setOnGroupExpandListener {
+
+            if (lastExpandPosation != -1 && it != lastExpandPosation) {
+                recyclerview?.collapseGroup(-1)
+            }
+            lastExpandPosation = it
+        }
         setOnChildClickListener(extraNameList, expandableListDetail)
     }
 
-    @Suppress("UNCHECKED_CAST")
     private fun setExtraAdapter(
-        extraNameList: List<String?>,
+        extraNameList: List<String>,
         expandableListDetail: HashMap<String, List<ExtraDataItem>>
     ) {
         extraAdapter =
             ExtraExpandableListAdapter(
                 requireContext(),
-                extraNameList as ArrayList<String>,
+                extraNameList,
                 expandableListDetail
             )
         recyclerview?.setAdapter(extraAdapter)

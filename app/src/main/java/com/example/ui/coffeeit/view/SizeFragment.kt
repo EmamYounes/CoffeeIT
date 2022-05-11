@@ -28,7 +28,7 @@ class SizeFragment : BaseFragment(), KodeinAware, OnClick {
 
     private val factory: CoffeeBrewViewModelFactory by instance()
 
-    private lateinit var viewModel: CoffeeBrewViewModel
+    private val viewModel: CoffeeBrewViewModel by instance()
     private var recyclerview: RecyclerView? = null
     private var emptyCase: LinearLayout? = null
 
@@ -58,7 +58,6 @@ class SizeFragment : BaseFragment(), KodeinAware, OnClick {
 
     private fun init() {
         sizeAdapter.callbacks = this
-        viewModel = ViewModelProviders.of(this, factory).get(CoffeeBrewViewModel::class.java)
         recyclerview = view?.findViewById(R.id.recyclerview)
         emptyCase = view?.findViewById(R.id.empty_case)
     }

@@ -6,6 +6,7 @@ import com.example.commons.network.ResponseInterceptor
 import com.example.commons.network.RetrofitService
 import com.example.ui.coffeeit.model.CoffeeBrewRemoteData
 import com.example.ui.coffeeit.model.CoffeeBrewRepository
+import com.example.ui.coffeeit.viewmodel.CoffeeBrewViewModel
 import com.example.ui.coffeeit.viewmodel.CoffeeBrewViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -25,5 +26,6 @@ class CoffeeItApplication : Application(), KodeinAware {
         bind() from singleton { CoffeeBrewRemoteData(instance()) }
         bind() from singleton { CoffeeBrewRepository(instance()) }
         bind() from singleton { CoffeeBrewViewModelFactory(instance()) }
+        bind() from singleton { CoffeeBrewViewModel(instance()) }
     }
 }

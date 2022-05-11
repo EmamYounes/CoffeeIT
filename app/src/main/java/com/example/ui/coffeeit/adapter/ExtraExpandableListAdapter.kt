@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.setPadding
 import com.example.ui.coffeeit.R
 import com.example.ui.coffeeit.data_classes.ExtraDataItem
 import com.example.ui.coffeeit.view.OnClick
@@ -38,10 +40,11 @@ class ExtraExpandableListAdapter internal constructor(
         if (convertView == null) {
             val layoutInflater =
                 this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = layoutInflater.inflate(R.layout.extra_sub_item, null)
+            convertView = layoutInflater.inflate(R.layout.extra_sub_item, parent, false)
         }
+        convertView?.setPadding(64)
         val expandedListTextView = convertView!!.findViewById<TextView>(R.id.extra_sub_name)
-        val checkImage = convertView.findViewById<TextView>(R.id.check_image)
+        val checkImage = convertView.findViewById<ImageView>(R.id.check_image)
 
         checkImage.tag = expandedListPosition
 
@@ -82,7 +85,10 @@ class ExtraExpandableListAdapter internal constructor(
         if (convertView == null) {
             val layoutInflater =
                 this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = layoutInflater.inflate(R.layout.extra_item, null)
+            convertView = layoutInflater.inflate(R.layout.extra_item, parent, false)
+        }
+        if (!isExpanded){
+            convertView?.setPadding(16)
         }
         val listTitleTextView = convertView!!.findViewById<TextView>(R.id.type_name)
         listTitleTextView.text = listTitle

@@ -15,4 +15,8 @@ class SuccessFragment : BaseFragment() {
     ): View? {
         return inflater.inflate(R.layout.success_fragment, container, false)
     }
+
+    override fun showToolBar(): Boolean {
+        return false
+    }
 }
