@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ExpandableListView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -31,6 +32,7 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
     private lateinit var viewModel: CoffeeBrewViewModel
     private var recyclerview: ExpandableListView? = null
     private var emptyCase: LinearLayout? = null
+    private var next: TextView? = null
 
     private var extraAdapter = ExtraExpandableListAdapter(
         requireContext(), mutableListOf(), hashMapOf()
@@ -63,19 +65,31 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
         viewModel = ViewModelProviders.of(this, factory).get(CoffeeBrewViewModel::class.java)
         recyclerview = view?.findViewById(R.id.recyclerview)
         emptyCase = view?.findViewById(R.id.empty_case)
+        next = view?.findViewById(R.id.next)
+
     }
 
 
     private fun bindUI() {
         manageSizeList()
+        handleNextBtnAction()
+    }
+
+    private fun handleNextBtnAction() {
+        next?.setOnClickListener {
+            navToOverviewFragment()
+        }
     }
 
     private fun manageSizeList() {
-        val extrasList = viewModel.successGetCoffeeItApi.value?.extras
-        if (extrasList?.isEmpty() == true) {
+        val fullExtrasList = viewModel.successGetCoffeeItApi.value?.extras
+        val selectedExtrasList = fullExtrasList?.filter {
+            viewModel.selectedStyle.value?.extras?.contains(it?.id) == true
+        }
+        if (selectedExtrasList?.isEmpty() == true) {
             handleEmptyState()
         } else {
-            extrasList?.let { handleListState(it) }
+            selectedExtrasList?.let { handleListState(it) }
         }
     }
 
@@ -115,7 +129,6 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
         val overviewDataItem = OverviewDataItem(item.name, Type.SUB_EXTRA)
         overviewList?.toMutableList()?.add(overviewDataItem)
         overviewList?.let { viewModel.overviewList.accept(it) }
-        navToOverviewFragment()
     }
 
     private fun navToOverviewFragment() {

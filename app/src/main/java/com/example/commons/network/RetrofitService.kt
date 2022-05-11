@@ -1,6 +1,6 @@
 package com.example.commons.network
 
-import com.example.commons.pojo.CoffeeItResponse
+import com.example.commons.pojo.CoffeeMachineResponse
 import com.example.commons.utilities.Constant
 import io.reactivex.rxjava3.core.Single
 import okhttp3.OkHttpClient
@@ -18,7 +18,7 @@ interface RetrofitService {
     @GET
     fun getCoffeeItApi(
         @Url url: String
-    ): Single<CoffeeItResponse>
+    ): Single<CoffeeMachineResponse>
 
     companion object {
 

@@ -2,7 +2,7 @@ package com.example.commons.pojo
 
 import com.google.gson.annotations.SerializedName
 
-data class CoffeeItResponse(
+data class CoffeeMachineResponse(
 
     @field:SerializedName("types")
     val types: List<TypesItem?>? = null,
@@ -11,7 +11,10 @@ data class CoffeeItResponse(
     val sizes: List<SizesItem?>? = null,
 
     @field:SerializedName("extras")
-    val extras: List<ExtrasItem?>? = null
+    val extras: List<ExtrasItem?>? = null,
+
+    @field:SerializedName("_id")
+    val id: String? = null
 )
 
 data class SubselectionsItem(
@@ -56,5 +59,8 @@ data class SizesItem(
     val name: String? = null,
 
     @field:SerializedName("_id")
-    val id: String? = null
+    val id: String? = null,
+
+    @field:SerializedName("__v")
+    val V: Int? = null
 )

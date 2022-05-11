@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.commons.pojo.CoffeeItResponse
+import com.example.commons.pojo.CoffeeMachineResponse
 import com.example.commons.pojo.TypesItem
 import com.example.commons.ui.BaseFragment
 import com.example.ui.coffeeit.R
@@ -92,7 +92,7 @@ class StyleFragment : BaseFragment(), KodeinAware, OnClick {
         }
     }
 
-    private fun handleListState(it: CoffeeItResponse) {
+    private fun handleListState(it: CoffeeMachineResponse) {
         it.types?.let { it1 -> styleAdapter.addList(it1) }
         recyclerview?.visibility = View.VISIBLE
         emptyCase?.visibility = View.GONE
@@ -115,6 +115,7 @@ class StyleFragment : BaseFragment(), KodeinAware, OnClick {
 
     override fun onItemClickedStyle(item: TypesItem) {
 
+        item.let { viewModel.selectedStyle.accept(item) }
         val overviewList = viewModel.overviewList.value
         val overviewDataItem = OverviewDataItem(item.name.toString(), Type.STYLE)
         overviewList?.toMutableList()?.add(overviewDataItem)

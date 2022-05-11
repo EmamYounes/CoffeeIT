@@ -70,11 +70,14 @@ class SizeFragment : BaseFragment(), KodeinAware, OnClick {
     }
 
     private fun manageSizeList() {
-        val sizeList = viewModel.successGetCoffeeItApi.value?.sizes
-        if (sizeList?.isEmpty() == true) {
+        val fullSizeList = viewModel.successGetCoffeeItApi.value?.sizes
+        val selectedSizeList = fullSizeList?.filter {
+            viewModel.selectedStyle.value?.sizes?.contains(it?.id) == true
+        }
+        if (selectedSizeList?.isEmpty() == true) {
             handleEmptyState()
         } else {
-            sizeList?.let { handleListState(it) }
+            selectedSizeList?.let { handleListState(it) }
         }
     }
 
@@ -100,6 +103,9 @@ class SizeFragment : BaseFragment(), KodeinAware, OnClick {
 
 
     override fun onItemClickedSize(item: SizesItem) {
+
+        item.let { viewModel.selectedSize.accept(item) }
+
         val overviewList = viewModel.overviewList.value
         val overviewDataItem = OverviewDataItem(item.name.toString(), Type.SIZE)
         overviewList?.toMutableList()?.add(overviewDataItem)
