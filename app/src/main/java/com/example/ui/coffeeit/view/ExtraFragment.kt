@@ -78,6 +78,21 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
 
     private fun handleNextBtnAction() {
         next?.setOnClickListener {
+            showLoading()
+
+            extraAdapter.getExtraHashMap().forEach { map ->
+                val extraListSelected = map.value.filter {
+                    it.isChecked
+                }.map {
+                    it.name
+                }.first()
+                if (extraListSelected.isNotEmpty()) {
+                    val overviewList = mutableListOf(OverviewDataItem(map.key, Type.EXTRA))
+                    overviewList.add(OverviewDataItem(extraListSelected, Type.EXTRA_AMOUNT))
+                    viewModel.overviewList.value?.let { overviewList.addAll(it) }
+                }
+            }
+            hideLoading()
             navToOverviewFragment()
         }
     }
@@ -129,6 +144,7 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
                 expandableListDetail
             )
         recyclerview?.setAdapter(extraAdapter)
+        recyclerview?.setGroupIndicator(null); // this will remove the indicator
     }
 
     private fun setOnChildClickListener(
@@ -141,25 +157,13 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
             val extraAmountDetails = expandableListDetail[extraName]?.get(childPosition)
 
             val extraList = expandableListDetail[extraName]?.map {
-                val isChecked = it.name == extraAmountDetails?.name
-                ExtraDataItem(extraAmountDetails!!.name, isChecked)
-            }
-
-            if (!extraAmountDetails!!.isChecked) {
-                extraAdapter.updateItem(extraName.toString(), extraList!!)
-                val overviewList = viewModel.overviewList.value
-                val extraItem = OverviewDataItem(extraName.toString(), Type.EXTRA)
-                val extraAmountItem = OverviewDataItem(extraAmountDetails.name, Type.EXTRA_AMOUNT)
-
-                if (overviewList?.contains(extraItem) != true) {
-                    overviewList?.toMutableList()?.add(extraItem)
+                var isChecked = false
+                if (it.name == extraAmountDetails?.name) {
+                    isChecked = !isChecked
                 }
-                if (overviewList?.contains(extraAmountItem) != true) {
-                    overviewList?.toMutableList()?.add(extraAmountItem)
-                }
-                overviewList?.let { viewModel.overviewList.accept(it) }
+                ExtraDataItem(it.name, isChecked)
             }
-
+            extraAdapter.updateItem(extraName.toString(), extraList!!)
             true
         }
     }

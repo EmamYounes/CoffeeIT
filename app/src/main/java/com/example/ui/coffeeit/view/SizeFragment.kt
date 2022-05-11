@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.os.bundleOf
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -105,10 +104,10 @@ class SizeFragment : BaseFragment(), KodeinAware, OnClick {
 
         item.let { viewModel.selectedSize.accept(item) }
 
-        val overviewList = viewModel.overviewList.value
         val overviewDataItem = OverviewDataItem(item.name.toString(), Type.SIZE)
-        overviewList?.toMutableList()?.add(overviewDataItem)
-        overviewList?.let { viewModel.overviewList.accept(it) }
+        val overviewList = mutableListOf(overviewDataItem)
+        viewModel.overviewList.value?.let { overviewList.addAll(it) }
+        overviewList.let { viewModel.overviewList.accept(it) }
         navToExtraFragment()
     }
 

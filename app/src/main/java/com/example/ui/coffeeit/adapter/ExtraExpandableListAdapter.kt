@@ -87,9 +87,6 @@ class ExtraExpandableListAdapter internal constructor(
                 this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = layoutInflater.inflate(R.layout.extra_item, parent, false)
         }
-        if (!isExpanded) {
-            convertView?.setPadding(16)
-        }
         val listTitleTextView = convertView!!.findViewById<TextView>(R.id.type_name)
         listTitleTextView.text = listTitle
         return convertView
@@ -109,4 +106,7 @@ class ExtraExpandableListAdapter internal constructor(
         notifyDataSetChanged()
     } //for add new item
 
+    fun getExtraHashMap(): HashMap<String, List<ExtraDataItem>> {
+        return dataList
+    }
 }

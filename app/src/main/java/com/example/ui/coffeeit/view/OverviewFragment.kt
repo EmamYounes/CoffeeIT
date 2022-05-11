@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.RelativeLayout
 import androidx.core.os.bundleOf
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,7 +28,7 @@ class OverviewFragment : BaseFragment(), KodeinAware {
     private val viewModel: CoffeeBrewViewModel by instance()
 
     private var recyclerview: RecyclerView? = null
-    private var submit: TextView? = null
+    private var submit: RelativeLayout? = null
     private var overviewAdapter = OverviewAdapter(mutableListOf())
 
     override fun onCreateView(

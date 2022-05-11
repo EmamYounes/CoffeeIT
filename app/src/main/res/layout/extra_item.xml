@@ -3,7 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="16dp">
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/separate_space"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/white" />
 
     <RelativeLayout
         android:id="@+id/type_view"
