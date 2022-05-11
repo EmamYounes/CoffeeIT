@@ -66,7 +66,7 @@ class OverviewFragment : BaseFragment(), KodeinAware {
     }
 
     private fun manageOverviewList() {
-        val overviewList = viewModel.overviewList.value
+        val overviewList = viewModel.overviewList.value?.reversed()
         overviewList?.let { handleListState(it) }
     }
 

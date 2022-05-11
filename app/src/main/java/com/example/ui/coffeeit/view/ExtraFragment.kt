@@ -85,11 +85,13 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
                     it.isChecked
                 }.map {
                     it.name
-                }.first()
-                if (extraListSelected.isNotEmpty()) {
-                    val overviewList = mutableListOf(OverviewDataItem(map.key, Type.EXTRA))
-                    overviewList.add(OverviewDataItem(extraListSelected, Type.EXTRA_AMOUNT))
+                }.firstOrNull()
+                if (extraListSelected?.isNotEmpty() == true) {
+                    val overviewList =
+                        mutableListOf(OverviewDataItem(extraListSelected, Type.EXTRA_AMOUNT))
+                    overviewList.add(OverviewDataItem(map.key, Type.EXTRA))
                     viewModel.overviewList.value?.let { overviewList.addAll(it) }
+                    overviewList.let { viewModel.overviewList.accept(it) }
                 }
             }
             hideLoading()
