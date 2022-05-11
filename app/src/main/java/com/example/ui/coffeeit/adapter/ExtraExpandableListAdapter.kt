@@ -87,7 +87,7 @@ class ExtraExpandableListAdapter internal constructor(
                 this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = layoutInflater.inflate(R.layout.extra_item, parent, false)
         }
-        if (!isExpanded){
+        if (!isExpanded) {
             convertView?.setPadding(16)
         }
         val listTitleTextView = convertView!!.findViewById<TextView>(R.id.type_name)
@@ -103,10 +103,9 @@ class ExtraExpandableListAdapter internal constructor(
         return true
     }
 
-    fun updateItem(pos: Int, obj: ExtraDataItem?) {
-        val list = this.dataList[this.titleList[pos]]?.toMutableList()
-        obj?.let { list?.removeAt(pos) }
-        obj?.let { list?.add(pos, it) }
+    fun updateItem(extraName: String, list: List<ExtraDataItem>) {
+
+        dataList[extraName] = list
         notifyDataSetChanged()
     } //for add new item
 

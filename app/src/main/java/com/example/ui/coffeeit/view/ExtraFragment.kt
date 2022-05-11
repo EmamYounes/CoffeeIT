@@ -35,7 +35,6 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
 
     private lateinit var extraAdapter: ExtraExpandableListAdapter
 
-    private var lastExpandPosation = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -106,25 +105,16 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
                 it?.name
             }.toList() as List<String>
 
-        val expandableListDetail =
-            extraList.map { extrasItem ->
-                val data = HashMap<String, List<ExtraDataItem>>()
-                val list = extrasItem?.subselections?.map {
-                    ExtraDataItem(it?.name.toString(), false)
-                }
-                data[extrasItem?.name.toString()] = list as List<ExtraDataItem>
-                data
-            }.first()
+        val expandableListDetail = HashMap<String, List<ExtraDataItem>>()
+        extraList.forEach { extrasItem ->
+            val list = extrasItem?.subselections?.map {
+                ExtraDataItem(it?.name.toString(), false)
+            }
+            expandableListDetail[extrasItem?.name.toString()] = list as List<ExtraDataItem>
+        }
 
         setExtraAdapter(extraNameList, expandableListDetail)
 
-        recyclerview?.setOnGroupExpandListener {
-
-            if (lastExpandPosation != -1 && it != lastExpandPosation) {
-                recyclerview?.collapseGroup(-1)
-            }
-            lastExpandPosation = it
-        }
         setOnChildClickListener(extraNameList, expandableListDetail)
     }
 
@@ -148,20 +138,28 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
         recyclerview?.setOnChildClickListener { expandableListView, view, groupPosition, childPosition, l ->
 
             val extraName = extraNameList[groupPosition]
-            val extraAmountName = expandableListDetail[extraName]?.get(childPosition)
-            extraAdapter.updateItem(childPosition, ExtraDataItem(extraAmountName!!.name, true))
+            val extraAmountDetails = expandableListDetail[extraName]?.get(childPosition)
 
-            val overviewList = viewModel.overviewList.value
-            val extraItem = OverviewDataItem(extraName.toString(), Type.EXTRA)
-            val extraAmountItem = OverviewDataItem(extraAmountName.name, Type.EXTRA_AMOUNT)
+            val extraList = expandableListDetail[extraName]?.map {
+                val isChecked = it.name == extraAmountDetails?.name
+                ExtraDataItem(extraAmountDetails!!.name, isChecked)
+            }
 
-            if (overviewList?.contains(extraItem) != true) {
-                overviewList?.toMutableList()?.add(extraItem)
+            if (!extraAmountDetails!!.isChecked) {
+                extraAdapter.updateItem(extraName.toString(), extraList!!)
+                val overviewList = viewModel.overviewList.value
+                val extraItem = OverviewDataItem(extraName.toString(), Type.EXTRA)
+                val extraAmountItem = OverviewDataItem(extraAmountDetails.name, Type.EXTRA_AMOUNT)
+
+                if (overviewList?.contains(extraItem) != true) {
+                    overviewList?.toMutableList()?.add(extraItem)
+                }
+                if (overviewList?.contains(extraAmountItem) != true) {
+                    overviewList?.toMutableList()?.add(extraAmountItem)
+                }
+                overviewList?.let { viewModel.overviewList.accept(it) }
             }
-            if (overviewList?.contains(extraAmountItem) != true) {
-                overviewList?.toMutableList()?.add(extraAmountItem)
-            }
-            overviewList?.let { viewModel.overviewList.accept(it) }
+
             true
         }
     }
