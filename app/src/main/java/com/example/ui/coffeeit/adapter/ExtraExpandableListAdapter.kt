@@ -51,19 +51,6 @@ class ExtraExpandableListAdapter internal constructor(
         } else {
             checkImage.visibility = View.GONE
         }
-        checkImage.setOnClickListener {
-            extraDataItem.isChecked = !extraDataItem.isChecked
-            if (extraDataItem.isChecked) {
-                checkImage.visibility = View.VISIBLE
-            } else {
-                checkImage.visibility = View.GONE
-            }
-            updateItem(expandedListPosition, extraDataItem)
-
-            callbacks!!.onItemClickedSubExtra(extraDataItem)
-
-
-        }
 
         return convertView
     }

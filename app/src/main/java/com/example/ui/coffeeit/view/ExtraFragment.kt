@@ -55,7 +55,7 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
     override fun onResume() {
         super.onResume()
         val list = viewModel.overviewList.value?.filter {
-            (it.type.name != Type.EXTRA.name || it.type.name != Type.SUB_EXTRA.name)
+            (it.type.name != Type.EXTRA.name || it.type.name != Type.EXTRA_AMOUNT.name)
         }
         list?.let { viewModel.overviewList.accept(it) }
     }
@@ -94,6 +94,11 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
     }
 
     private fun handleListState(extraList: List<ExtrasItem?>) {
+
+        recyclerview?.visibility = View.VISIBLE
+        emptyCase?.visibility = View.GONE
+
+
         val extraNameList: List<String?> =
             extraList.map {
                 it?.name
@@ -108,15 +113,49 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
                 data[extrasItem?.name.toString()] = list as List<ExtraDataItem>
                 data
             }.first()
+
+        setExtraAdapter(extraNameList, expandableListDetail)
+
+        setOnChildClickListener(extraNameList, expandableListDetail)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun setExtraAdapter(
+        extraNameList: List<String?>,
+        expandableListDetail: HashMap<String, List<ExtraDataItem>>
+    ) {
         extraAdapter =
             ExtraExpandableListAdapter(
                 requireContext(),
                 extraNameList as ArrayList<String>,
                 expandableListDetail
             )
-        recyclerview!!.setAdapter(extraAdapter)
-        recyclerview?.visibility = View.VISIBLE
-        emptyCase?.visibility = View.GONE
+        recyclerview?.setAdapter(extraAdapter)
+    }
+
+    private fun setOnChildClickListener(
+        extraNameList: List<String?>,
+        expandableListDetail: HashMap<String, List<ExtraDataItem>>
+    ) {
+        recyclerview?.setOnChildClickListener { expandableListView, view, groupPosition, childPosition, l ->
+
+            val extraName = extraNameList[groupPosition]
+            val extraAmountName = expandableListDetail[extraName]?.get(childPosition)
+            extraAdapter.updateItem(childPosition, ExtraDataItem(extraAmountName!!.name, true))
+
+            val overviewList = viewModel.overviewList.value
+            val extraItem = OverviewDataItem(extraName.toString(), Type.EXTRA)
+            val extraAmountItem = OverviewDataItem(extraAmountName.name, Type.EXTRA_AMOUNT)
+
+            if (overviewList?.contains(extraItem) != true) {
+                overviewList?.toMutableList()?.add(extraItem)
+            }
+            if (overviewList?.contains(extraAmountItem) != true) {
+                overviewList?.toMutableList()?.add(extraAmountItem)
+            }
+            overviewList?.let { viewModel.overviewList.accept(it) }
+            true
+        }
     }
 
     private fun handleEmptyState() {
@@ -126,7 +165,7 @@ class ExtraFragment : BaseFragment(), KodeinAware, OnClick {
 
     override fun onItemClickedSubExtra(item: ExtraDataItem) {
         val overviewList = viewModel.overviewList.value
-        val overviewDataItem = OverviewDataItem(item.name, Type.SUB_EXTRA)
+        val overviewDataItem = OverviewDataItem(item.name, Type.EXTRA_AMOUNT)
         overviewList?.toMutableList()?.add(overviewDataItem)
         overviewList?.let { viewModel.overviewList.accept(it) }
     }

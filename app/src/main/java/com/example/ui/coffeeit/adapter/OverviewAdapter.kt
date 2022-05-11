@@ -42,7 +42,7 @@ class OverviewAdapter(myDataset: MutableList<OverviewDataItem>) :
         var extraSubName: TextView = view.findViewById(R.id.extra_sub_name)
 
         fun bind(model: OverviewDataItem) {
-            if (model.type.name == Type.SUB_EXTRA.name) {
+            if (model.type.name == Type.EXTRA_AMOUNT.name) {
                 extraSubView.visibility = View.VISIBLE
                 name.visibility = View.GONE
                 extraSubName.text = model.name
